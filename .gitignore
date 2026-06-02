@@ -11,3 +11,8 @@ Thumbs.db
 
 # Ignore Jupyter Notebook checkpoints
 .ipynb_checkpoints/
+
+# Ignore local database files
+*.db
+*.sqlite
+*.sqlite3
