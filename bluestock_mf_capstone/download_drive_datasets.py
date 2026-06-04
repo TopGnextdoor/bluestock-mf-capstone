@@ -1,8 +1,9 @@
 import urllib.request
-import os
+from pathlib import Path
 
-RAW_DIR = "data/raw"
-os.makedirs(RAW_DIR, exist_ok=True)
+BASE_DIR = Path(__file__).resolve().parent
+RAW_DIR = BASE_DIR / "data" / "raw"
+RAW_DIR.mkdir(parents=True, exist_ok=True)
 
 files_map = {
     "01_fund_master.csv": "1vxvhJB2gVKsLfv51pXcLa39hnOr7M6vZ",
@@ -20,7 +21,7 @@ files_map = {
 def download_files():
     for filename, file_id in files_map.items():
         url = f"https://docs.google.com/uc?export=download&id={file_id}"
-        dest_path = os.path.join(RAW_DIR, filename)
+        dest_path = RAW_DIR / filename
         print(f"Downloading {filename} from Google Drive...")
         try:
             # Simple download using urllib
@@ -41,3 +42,4 @@ def download_files():
 
 if __name__ == "__main__":
     download_files()
+

@@ -1,15 +1,17 @@
 import pandas as pd
-import os
+from pathlib import Path
 
-RAW_DIR = "data/raw"
+BASE_DIR = Path(__file__).resolve().parent
+RAW_DIR = BASE_DIR / "data" / "raw"
+REPORTS_DIR = BASE_DIR / "reports"
 
 def validate_and_report():
     print("="*60)
     print("NEW DATASETS VALIDATION")
     print("="*60)
     
-    df_master = pd.read_csv(os.path.join(RAW_DIR, "fund_master.csv"))
-    df_nav = pd.read_csv(os.path.join(RAW_DIR, "nav_history.csv"))
+    df_master = pd.read_csv(RAW_DIR / "fund_master.csv")
+    df_nav = pd.read_csv(RAW_DIR / "nav_history.csv")
     
     # 1. Unique AMCs, categories, sub-categories, risk grades
     print(f"Total Mutual Fund Schemes in Master: {len(df_master)}")
@@ -44,9 +46,8 @@ def validate_and_report():
         print("Success: Every AMFI code in nav_history exists in fund_master.")
         
     # Write Data Quality Summary report
-    reports_dir = "reports"
-    os.makedirs(reports_dir, exist_ok=True)
-    report_path = os.path.join(reports_dir, "data_quality_summary.md")
+    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    report_path = REPORTS_DIR / "data_quality_summary.md"
     
     summary = f"""# Data Quality Summary Report (Google Drive Datasets)
 
@@ -65,14 +66,14 @@ This report summarizes the structure and data quality of the 10 Mutual Fund data
    - **Data Quality**: 0 missing values. NAV contains all positive floating point values.
 
 3. **Other Datasets Ingested**
-   - **03_aum_by_fund_house.csv**: AUM for {len(pd.read_csv(os.path.join(RAW_DIR, '03_aum_by_fund_house.csv')))} AMCs.
-   - **04_monthly_sip_inflows.csv**: {len(pd.read_csv(os.path.join(RAW_DIR, '04_monthly_sip_inflows.csv')))} months of SIP flows.
-   - **05_category_inflows.csv**: Inflows across categories for {len(pd.read_csv(os.path.join(RAW_DIR, '05_category_inflows.csv')))} months.
+   - **03_aum_by_fund_house.csv**: AUM for {len(pd.read_csv(RAW_DIR / '03_aum_by_fund_house.csv'))} AMCs.
+   - **04_monthly_sip_inflows.csv**: {len(pd.read_csv(RAW_DIR / '04_monthly_sip_inflows.csv'))} months of SIP flows.
+   - **05_category_inflows.csv**: Inflows across categories for {len(pd.read_csv(RAW_DIR / '05_category_inflows.csv'))} months.
    - **06_industry_folio_count.csv**: Folio metrics over time.
    - **07_scheme_performance.csv**: Alpha, beta, sharpe ratios for schemes.
-   - **08_investor_transactions.csv**: {len(pd.read_csv(os.path.join(RAW_DIR, '08_investor_transactions.csv')))} retail transaction records.
+   - **08_investor_transactions.csv**: {len(pd.read_csv(RAW_DIR / '08_investor_transactions.csv'))} retail transaction records.
    - **09_portfolio_holdings.csv**: Stock weights for schemes.
-   - **10_benchmark_indices.csv**: {len(pd.read_csv(os.path.join(RAW_DIR, '10_benchmark_indices.csv')))} daily close values for benchmarks.
+   - **10_benchmark_indices.csv**: {len(pd.read_csv(RAW_DIR / '10_benchmark_indices.csv'))} daily close values for benchmarks.
 
 ## AMFI Codes Validation
 - **Validation Rule**: Every unique scheme code in `nav_history` must exist in `fund_master`.
@@ -92,3 +93,4 @@ This report summarizes the structure and data quality of the 10 Mutual Fund data
 
 if __name__ == "__main__":
     validate_and_report()
+

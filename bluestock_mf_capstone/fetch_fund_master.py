@@ -1,10 +1,11 @@
 import urllib.request
 import re
-import os
+from pathlib import Path
 import pandas as pd
 
-RAW_DIR = "data/raw"
-os.makedirs(RAW_DIR, exist_ok=True)
+BASE_DIR = Path(__file__).resolve().parent
+RAW_DIR = BASE_DIR / "data" / "raw"
+RAW_DIR.mkdir(parents=True, exist_ok=True)
 
 def download_amfi_master():
     url = "https://portal.amfiindia.com/spages/NAVAll.txt"
@@ -17,7 +18,7 @@ def download_amfi_master():
         with urllib.request.urlopen(req) as response:
             content = response.read().decode('utf-8', errors='ignore')
             
-        txt_path = os.path.join(RAW_DIR, "amfi_nav0.txt")
+        txt_path = RAW_DIR / "amfi_nav0.txt"
         with open(txt_path, "w", encoding="utf-8") as f:
             f.write(content)
         print(f"Downloaded AMFI master data to {txt_path}")
@@ -102,9 +103,10 @@ def parse_amfi_to_csv(content):
                 })
                 
     df = pd.DataFrame(schemes)
-    csv_path = os.path.join(RAW_DIR, "fund_master.csv")
+    csv_path = RAW_DIR / "fund_master.csv"
     df.to_csv(csv_path, index=False)
     print(f"Parsed {len(df)} schemes and saved to {csv_path}")
 
 if __name__ == "__main__":
     download_amfi_master()
+

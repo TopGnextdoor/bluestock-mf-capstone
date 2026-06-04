@@ -3,10 +3,11 @@ import json
 import csv
 import pandas as pd
 import time
-import os
+from pathlib import Path
 
-RAW_DIR = "data/raw"
-os.makedirs(RAW_DIR, exist_ok=True)
+BASE_DIR = Path(__file__).resolve().parent
+RAW_DIR = BASE_DIR / "data" / "raw"
+RAW_DIR.mkdir(parents=True, exist_ok=True)
 
 # 1. Fetch live NAV for HDFC Top 100 Direct (125497)
 def fetch_hdfc_nav():
@@ -18,14 +19,14 @@ def fetch_hdfc_nav():
         data = response.json()
         
         # Save raw JSON
-        with open(os.path.join(RAW_DIR, "hdfc_125497_raw.json"), "w") as f:
+        with open(RAW_DIR / "hdfc_125497_raw.json", "w") as f:
             json.dump(data, f, indent=4)
             
         # Parse and save as CSV
         meta = data.get("meta", {})
         nav_list = data.get("data", [])
         
-        csv_path = os.path.join(RAW_DIR, "hdfc_125497_nav.csv")
+        csv_path = RAW_DIR / "hdfc_125497_nav.csv"
         with open(csv_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(["date", "nav"])
@@ -56,7 +57,7 @@ def fetch_5_schemes():
             data = response.json()
             
             nav_list = data.get("data", [])
-            csv_path = os.path.join(RAW_DIR, f"{name}_{code}_nav.csv")
+            csv_path = RAW_DIR / f"{name}_{code}_nav.csv"
             with open(csv_path, "w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
                 writer.writerow(["date", "nav"])
@@ -70,3 +71,4 @@ def fetch_5_schemes():
 if __name__ == "__main__":
     fetch_hdfc_nav()
     fetch_5_schemes()
+
