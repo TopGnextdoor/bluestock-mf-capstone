@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluestock MF Dashboard | Mutual Fund Analytics</title>
+    <meta name="description" content="Bluestock Mutual Fund Capstone Dashboard — Industry overview, fund performance, investor analytics, and SIP market trends.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ── Sidebar ──────────────────────────────────────────────── -->
+    <aside class="sidebar" id="sidebar">
+        <div class="logo-area">
+            <div class="logo-icon">B</div>
+            <div class="logo-text">
+                <span class="logo-brand">BLUESTOCK</span>
+                <span class="logo-sub">MF Analytics</span>
+            </div>
+        </div>
+        <nav class="nav-menu">
+            <button class="nav-btn active" data-page="page1" id="nav-page1">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Industry Overview</span>
+            </button>
+            <button class="nav-btn" data-page="page2" id="nav-page2">
+                <span class="nav-icon">📈</span>
+                <span class="nav-label">Fund Performance</span>
+            </button>
+            <button class="nav-btn" data-page="page3" id="nav-page3">
+                <span class="nav-icon">👥</span>
+                <span class="nav-label">Investor Analytics</span>
+            </button>
+            <button class="nav-btn" data-page="page4" id="nav-page4">
+                <span class="nav-icon">💹</span>
+                <span class="nav-label">SIP & Market Trends</span>
+            </button>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="footer-text">Bluestock Fintech © 2025</span>
+        </div>
+    </aside>
+
+    <!-- ── Main Content ────────────────────────────────────────── -->
+    <main class="main-content" id="main-content">
+
+        <!-- ═══ PAGE 1: INDUSTRY OVERVIEW ═══ -->
+        <section class="page" id="page1">
+            <div class="page-header">
+                <h1 id="page1-title">Industry Overview</h1>
+                <span class="page-subtitle">Indian Mutual Fund Industry Snapshot</span>
+            </div>
+
+            <!-- KPI Cards Row -->
+            <div class="kpi-row" id="kpi-row">
+                <div class="kpi-card kpi-blue" id="kpi-aum">
+                    <div class="kpi-label">Total AUM</div>
+                    <div class="kpi-value" id="kpi-aum-value">—</div>
+                    <div class="kpi-sub">Industry AUM</div>
+                </div>
+                <div class="kpi-card kpi-green" id="kpi-sip">
+                    <div class="kpi-label">SIP Inflows</div>
+                    <div class="kpi-value" id="kpi-sip-value">—</div>
+                    <div class="kpi-sub">Monthly Peak</div>
+                </div>
+                <div class="kpi-card kpi-orange" id="kpi-folio">
+                    <div class="kpi-label">Total Folios</div>
+                    <div class="kpi-value" id="kpi-folio-value">—</div>
+                    <div class="kpi-sub">Investor Folios</div>
+                </div>
+                <div class="kpi-card kpi-pink" id="kpi-schemes">
+                    <div class="kpi-label">Active Schemes</div>
+                    <div class="kpi-value" id="kpi-schemes-value">—</div>
+                    <div class="kpi-sub">Across AMCs</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="chart-row">
+                <div class="chart-card chart-wide" id="chart-aum-trend-card">
+                    <div class="chart-title">Industry AUM Trend (2022 – 2025)</div>
+                    <canvas id="chart-aum-trend"></canvas>
+                </div>
+            </div>
+            <div class="chart-row">
+                <div class="chart-card chart-wide" id="chart-aum-amc-card">
+                    <div class="chart-title">AUM by Fund House (Latest Period)</div>
+                    <canvas id="chart-aum-amc"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ PAGE 2: FUND PERFORMANCE ═══ -->
+        <section class="page hidden" id="page2">
+            <div class="page-header">
+                <h1 id="page2-title">Fund Performance</h1>
+                <span class="page-subtitle">Return, Risk & Scorecard Analysis</span>
+            </div>
+
+            <!-- Slicers -->
+            <div class="slicer-row" id="perf-slicers">
+                <div class="slicer">
+                    <label for="slicer-fundhouse">Fund House</label>
+                    <select id="slicer-fundhouse"><option value="All">All</option></select>
+                </div>
+                <div class="slicer">
+                    <label for="slicer-category">Category</label>
+                    <select id="slicer-category"><option value="All">All</option></select>
+                </div>
+                <div class="slicer">
+                    <label for="slicer-plan">Plan</label>
+                    <select id="slicer-plan"><option value="All">All</option></select>
+                </div>
+            </div>
+
+            <div class="chart-row">
+                <div class="chart-card chart-half" id="chart-scatter-card">
+                    <div class="chart-title">Return vs Risk (Bubble = AUM)</div>
+                    <canvas id="chart-scatter"></canvas>
+                </div>
+                <div class="chart-card chart-half" id="chart-scorecard-card">
+                    <div class="chart-title">Fund Scorecard <span class="sort-hint">(click headers to sort)</span></div>
+                    <div class="table-wrap" id="scorecard-table-wrap"></div>
+                </div>
+            </div>
+            <div class="chart-row">
+                <div class="chart-card chart-wide" id="chart-nav-bench-card">
+                    <div class="chart-title">NAV vs Benchmark (Nifty 50) — Normalised to 100</div>
+                    <div class="nav-fund-selector">
+                        <label for="nav-fund-select">Select Fund:</label>
+                        <select id="nav-fund-select"></select>
+                    </div>
+                    <canvas id="chart-nav-bench"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ PAGE 3: INVESTOR ANALYTICS ═══ -->
+        <section class="page hidden" id="page3">
+            <div class="page-header">
+                <h1 id="page3-title">Investor Analytics</h1>
+                <span class="page-subtitle">Transaction Patterns & Demographics</span>
+            </div>
+
+            <!-- Slicers -->
+            <div class="slicer-row" id="inv-slicers">
+                <div class="slicer">
+                    <label for="slicer-state">State</label>
+                    <select id="slicer-state"><option value="All">All</option></select>
+                </div>
+                <div class="slicer">
+                    <label for="slicer-agegroup">Age Group</label>
+                    <select id="slicer-agegroup"><option value="All">All</option></select>
+                </div>
+                <div class="slicer">
+                    <label for="slicer-citytier">City Tier</label>
+                    <select id="slicer-citytier"><option value="All">All</option></select>
+                </div>
+            </div>
+
+            <div class="chart-row">
+                <div class="chart-card chart-half" id="chart-state-card">
+                    <div class="chart-title">Transaction Amount by State (Top 10)</div>
+                    <canvas id="chart-state"></canvas>
+                </div>
+                <div class="chart-card chart-half" id="chart-donut-card">
+                    <div class="chart-title">SIP / Lumpsum / Redemption Split</div>
+                    <canvas id="chart-donut"></canvas>
+                </div>
+            </div>
+            <div class="chart-row">
+                <div class="chart-card chart-half" id="chart-age-sip-card">
+                    <div class="chart-title">Avg SIP Amount by Age Group</div>
+                    <canvas id="chart-age-sip"></canvas>
+                </div>
+                <div class="chart-card chart-half" id="chart-monthly-vol-card">
+                    <div class="chart-title">Monthly Transaction Volume</div>
+                    <canvas id="chart-monthly-vol"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ PAGE 4: SIP & MARKET TRENDS ═══ -->
+        <section class="page hidden" id="page4">
+            <div class="page-header">
+                <h1 id="page4-title">SIP & Market Trends</h1>
+                <span class="page-subtitle">Systematic Investment & Index Correlation</span>
+            </div>
+
+            <div class="chart-row">
+                <div class="chart-card chart-wide" id="chart-sip-nifty-card">
+                    <div class="chart-title">SIP Inflows vs Nifty 50 (2022 – 2025)</div>
+                    <canvas id="chart-sip-nifty"></canvas>
+                </div>
+            </div>
+            <div class="chart-row">
+                <div class="chart-card chart-half" id="chart-heatmap-card">
+                    <div class="chart-title">Category Net Inflow Heatmap</div>
+                    <div class="heatmap-container" id="heatmap-container"></div>
+                </div>
+                <div class="chart-card chart-half" id="chart-top5-card">
+                    <div class="chart-title">Top 5 Categories by Net Inflow (FY25)</div>
+                    <canvas id="chart-top5"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ DRILL-THROUGH: NAV DETAIL ═══ -->
+        <section class="page hidden" id="page-drill">
+            <div class="page-header">
+                <button class="back-btn" id="drill-back-btn">← Back to Fund Performance</button>
+                <h1 id="drill-title">NAV Detail</h1>
+                <span class="page-subtitle" id="drill-subtitle"></span>
+            </div>
+            <div class="drill-info-row" id="drill-info-row"></div>
+            <div class="chart-row">
+                <div class="chart-card chart-wide">
+                    <div class="chart-title">Historical NAV</div>
+                    <canvas id="chart-drill-nav"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ── Tooltip ──────────────────────────────────────────────── -->
+    <div class="custom-tooltip" id="custom-tooltip"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
