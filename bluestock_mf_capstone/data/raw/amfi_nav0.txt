@@ -7746,10 +7746,10 @@ Canara Robeco Mutual Fund
  
 DSP Mutual Fund
  
-148595;INF740KA1PP3;-;DSP Value Fund - Direct Plan - Growth;23.989;09-Jun-2026
-148596;INF740KA1PQ1;INF740KA1PR9;DSP Value Fund - Direct Plan - IDCW;18.17;09-Jun-2026
-148594;INF740KA1PM0;-;DSP Value Fund - Regular Plan - Growth;22.99;09-Jun-2026
-148597;INF740KA1PN8;INF740KA1PO6;DSP Value Fund - Regular Plan - IDCW;16.068;09-Jun-2026
+148595;INF740KA1PP3;-;DSP Value Fund - Direct Plan - Growth;23.867;10-Jun-2026
+148596;INF740KA1PQ1;INF740KA1PR9;DSP Value Fund - Direct Plan - IDCW;18.078;10-Jun-2026
+148594;INF740KA1PM0;-;DSP Value Fund - Regular Plan - Growth;22.872;10-Jun-2026
+148597;INF740KA1PN8;INF740KA1PO6;DSP Value Fund - Regular Plan - IDCW;15.986;10-Jun-2026
  
 Franklin Templeton Mutual Fund
  
@@ -10327,10 +10327,10 @@ DSP Mutual Fund
 112126;INF740K01284;-;DSP Global Clean Energy Overseas Equity Omni FoF - Regular Plan - Growth;29.5602;10-Jun-2026
 112127;INF740K01292;INF740K01300;DSP Global Clean Energy Overseas Equity Omni FoF - Regular Plan - IDCW;20.5535;10-Jun-2026
 119275;INF740K01PC5;-;DSP Global Clean Energy Overseas Equity Omni FoF Direct Plan - Growth;31.2887;10-Jun-2026
-149816;INF740KA1QP1;-;DSP Global Innovation Overseas Equity Omni FoF - Direct - Growth;22.1062;09-Jun-2026
-149815;INF740KA1QQ9;INF740KA1QR7;DSP Global Innovation Overseas Equity Omni FoF - Direct - IDCW;22.1062;09-Jun-2026
-149817;INF740KA1QM8;-;DSP Global Innovation Overseas Equity Omni FoF - Regular - Growth;21.2565;09-Jun-2026
-149814;INF740KA1QN6;INF740KA1QO4;DSP Global Innovation Overseas Equity Omni FoF - Regular - IDCW;21.2565;09-Jun-2026
+149816;INF740KA1QP1;-;DSP Global Innovation Overseas Equity Omni FoF - Direct - Growth;21.8258;10-Jun-2026
+149815;INF740KA1QQ9;INF740KA1QR7;DSP Global Innovation Overseas Equity Omni FoF - Direct - IDCW;21.8258;10-Jun-2026
+149817;INF740KA1QM8;-;DSP Global Innovation Overseas Equity Omni FoF - Regular - Growth;20.9864;10-Jun-2026
+149814;INF740KA1QN6;INF740KA1QO4;DSP Global Innovation Overseas Equity Omni FoF - Regular - IDCW;20.9864;10-Jun-2026
 152528;INF740KA1UJ6;-;DSP US Specific Debt Passive FoF - Direct - Growth;12.5167;10-Jun-2026
 152529;INF740KA1UK4;INF740KA1UL2;DSP US Specific Debt Passive FoF - Direct - IDCW;12.5167;10-Jun-2026
 152527;INF740KA1UG2;-;DSP US Specific Debt Passive FoF - Regular - Growth;12.5027;10-Jun-2026

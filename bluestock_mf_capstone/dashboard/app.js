@@ -36,19 +36,28 @@ const CHART_DEFAULTS = {
 };
 
 // ── Data Loading ──────────────────────────────────────────────
+// Data is pre-bundled in data.js as window.__DASHBOARD_DATA__
+// This avoids fetch() CORS issues when opened via file:// protocol.
 async function loadAllData() {
-    const files = [
+    const keys = [
         'dim_fund','fact_aum','fact_performance','fact_nav',
         'fact_transactions','monthly_sip_inflows','category_inflows',
         'industry_folio_count','benchmark_indices'
     ];
-    for (const f of files) {
-        try {
-            const resp = await fetch(`data/${f}.json`);
-            DATA[f] = await resp.json();
-        } catch(e) {
-            console.warn(`Failed to load ${f}:`, e);
-            DATA[f] = [];
+    const bundled = window.__DASHBOARD_DATA__ || {};
+    if (Object.keys(bundled).length > 0) {
+        // Use pre-bundled data (works with file:// and http://)
+        keys.forEach(k => { DATA[k] = bundled[k] || []; });
+    } else {
+        // Fallback: try fetch (requires an HTTP server)
+        for (const f of keys) {
+            try {
+                const resp = await fetch(`data/${f}.json`);
+                DATA[f] = await resp.json();
+            } catch(e) {
+                console.warn(`Failed to load ${f}:`, e);
+                DATA[f] = [];
+            }
         }
     }
 }
