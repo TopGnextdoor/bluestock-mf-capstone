@@ -10,8 +10,8 @@ def validate_and_report():
     print("NEW DATASETS VALIDATION")
     print("="*60)
     
-    df_master = pd.read_csv(RAW_DIR / "fund_master.csv")
-    df_nav = pd.read_csv(RAW_DIR / "nav_history.csv")
+    df_master = pd.read_csv(RAW_DIR / "01_fund_master.csv")
+    df_nav = pd.read_csv(RAW_DIR / "02_nav_history.csv")
     
     # 1. Unique AMCs, categories, sub-categories, risk grades
     print(f"Total Mutual Fund Schemes in Master: {len(df_master)}")
